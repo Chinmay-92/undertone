@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Undertone video cards</title>
+<style>
+  :root { --bg:#f7f1ec; --paper:#fffdfb; --ink:#2b1d24; --muted:#7a6a70; --plum:#502a3a; --plum2:#6e3b52; --line:#e7dbd3; --accent:#c7845f; --ok:#4f7a5a; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; width:1280px; height:720px; overflow:hidden; }
+  body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:transparent; }
+  .card { width:1280px; height:720px; background:var(--bg); display:none; position:relative; padding:80px 100px; }
+  .card.on { display:flex; flex-direction:column; justify-content:center; }
+  h1, h2 { font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:16px; color:var(--plum2); font-weight:600; margin:0 0 18px; }
+  .logo { color:var(--plum); }
+  .title h1 { font-size:110px; line-height:1; }
+  .title .tag { font-family: Georgia, serif; font-size:40px; line-height:1.25; margin-top:28px; }
+  .title .tag em { color:var(--plum2); }
+  .title .meta { margin-top:40px; font-size:20px; color:var(--muted); }
+  .problem h2 { font-size:56px; line-height:1.12; max-width:1000px; }
+  .points { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+  .pt { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:26px 26px 28px; }
+  .pt b { display:block; font-family: Georgia, serif; font-size:26px; margin-bottom:8px; color:var(--plum); }
+  .pt span { font-size:19px; color:var(--muted); line-height:1.45; }
+  .built h2 { font-size:46px; margin-bottom:34px; }
+  .flow { display:grid; grid-template-columns: 250px 50px 300px 50px 1fr; align-items:center; }
+  .box { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px 24px; }
+  .box h3 { margin:0 0 6px; font-size:22px; font-family: Georgia, serif; color:var(--plum); }
+  .box p { margin:0; font-size:16px; color:var(--muted); line-height:1.45; }
+  .arrow { text-align:center; font-size:34px; color:var(--accent); }
+  .apis { display:flex; flex-direction:column; gap:10px; }
+  .api { background:var(--plum); color:#fff; border-radius:12px; padding:12px 18px; font-size:19px; display:flex; justify-content:space-between; }
+  .api small { opacity:.75; font-size:14px; align-self:center; }
+  .api.vto { background:var(--plum2); }
+  .footnote { margin-top:30px; font-size:18px; color:var(--muted); }
+  .closing { align-items:center; text-align:center; }
+  .closing h1 { font-size:96px; }
+  .closing .tag { font-family: Georgia, serif; font-size:38px; margin-top:24px; }
+  .closing .meta { margin-top:44px; font-size:20px; color:var(--muted); line-height:1.6; }
+  /* captions: transparent PNG overlays for footage segments */
+  .cap { display:none; position:absolute; left:50%; transform:translateX(-50%); white-space:nowrap; top:20px; background:rgba(43,29,36,.86); color:#fff; border-radius:999px; padding:10px 20px; font-size:19px; font-weight:500; }
+  .cap.on { display:block; }
+  .cap i { font-style:normal; color:#f0c9a8; }
+</style>
+</head>
+<body>
+  <section class="card title" id="title">
+    <p class="eyebrow">YouCam API · Skin AI &amp; eCommerce VTO Hackathon</p>
+    <h1><span class="logo">◐</span> Undertone</h1>
+    <p class="tag">One selfie. Your shade, your metal,<br /><em>your whole look</em>, before you buy.</p>
+    <p class="meta">Skin AI + Beauty and Jewellery virtual try-on, built on Perfect Corp's YouCam API</p>
+  </section>
+
+  <section class="card problem" id="problem">
+    <p class="eyebrow">The problem</p>
+    <h2>Online, shoppers are guessing their shade and undertone from a product photo.</h2>
+    <div class="points">
+      <div class="pt"><b>Wrong shade</b><span>Foundation colour and undertone are the hardest things to judge on a screen.</span></div>
+      <div class="pt"><b>Returns</b><span>A shade that looks orange or ashy on the skin goes straight back.</span></div>
+      <div class="pt"><b>Separate aisles</b><span>Gold or silver depends on the same undertone, but jewellery is sold with nothing joining it to your skin.</span></div>
+    </div>
+  </section>
+
+  <section class="card built" id="built">
+    <p class="eyebrow">How it's built</p>
+    <h2>Five YouCam APIs, API key kept on the server</h2>
+    <div class="flow">
+      <div class="box"><h3>Storefront</h3><p>React + Vite. Profile, ranked shelves, try-on, bag. Talks only to <b>/api/*</b>.</p></div>
+      <div class="arrow">→</div>
+      <div class="box"><h3>Node / Express proxy</h3><p><b>YOUCAM_API_KEY</b> stays server-side. Typed v2.0 client: upload, create task, poll. Colour science: CIELAB, ITA°, CIEDE2000.</p></div>
+      <div class="arrow">→</div>
+      <div class="apis">
+        <div class="api">Skin Tone Analysis <small>in parallel</small></div>
+        <div class="api">Skin Analysis <small>in parallel</small></div>
+        <div class="api vto">Makeup VTO <small>chain 1</small></div>
+        <div class="api vto">Earrings VTO <small>chain 2</small></div>
+        <div class="api vto">Necklace VTO <small>chain 3</small></div>
+      </div>
+    </div>
+    <p class="footnote">About 32 units for a full scan + try-on · no key? the same pipeline runs against a built-in mock of the YouCam API</p>
+  </section>
+
+  <section class="card closing" id="closing">
+    <h1><span class="logo">◐</span> Undertone</h1>
+    <p class="tag">Your shade. Your metal. Your whole look.</p>
+    <p class="meta">Built on the Perfect Corp YouCam API<br />Skin Tone Analysis · Skin Analysis · Makeup VTO · Earrings VTO · Necklace VTO</p>
+  </section>
+
+  <div class="cap" id="cap-upload">Live YouCam API · <i>Skin Tone Analysis + Skin Analysis</i></div>
+  <div class="cap" id="cap-profile">Undertone from hue angle · depth from ITA° · finish from skin scores</div>
+  <div class="cap" id="cap-recs">Ranked by CIEDE2000 ΔE + undertone · metal by undertone</div>
+  <div class="cap" id="cap-tryon">Live chain · <i>Makeup VTO → Earrings VTO → Necklace VTO</i></div>
+  <div class="cap" id="cap-bag">Whole look to bag in one tap</div>
+
+  <script>
+    const id = new URLSearchParams(location.search).get("show");
+    const el = document.getElementById(id);
+    if (el) el.classList.add("on");
+  </script>
+</body>
+</html>
